@@ -24,7 +24,8 @@
 	border-color: rgba(238, 255, 168, 0.3);
 	background-color: rgba(255, 255, 255, 0.5);
 }
-#login-title {
+
+.login-title {
 	text-align: center;
 	margin-bottom: 25px;
 }
