@@ -1,4 +1,5 @@
 //$(document).ready(main);
+			/* Principal*/
 $(document).ready(function(){
 
 	var contador=1;
@@ -26,8 +27,16 @@ $(document).ready(function(){
 			$('.children').slideToggle();
 		});
 
-
-
-
 });
-	
+
+$(document).ready(function(){
+		$('#newPass2').keyup(function(){
+			if($('#newPass2').val() == $('#newPass1').val() || $('#newPass2').val() == ""){
+				$('#confirmMessage').text("");
+			}else{
+				$('#confirmMessage').text("Las contraseñas no coinciden");
+				$('#confirmMessage').css("font-weight","Bold");
+			}
+			
+		});
+}); 
