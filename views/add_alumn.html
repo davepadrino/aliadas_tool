@@ -11,8 +11,14 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="../app/css/responsive.css"/> 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+	<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="../example.js"></script>
+
 </head>
-<body>
+<body ng-app="myApp">
 	<header>
 		<div id="menu-fijo" class="row">
 			<div class="logo col-md-3 col-md-3">
@@ -58,50 +64,202 @@
 			</ul>
 		</nav>
 	</header>
-	<div id="agregar_curso">
+	<div id="agregar_alumno">	
 		<div class="row">
-			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 			</div>
 
-			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 				<div>
 					<h2> Agregar Alumnos </h2>
 				</div>
-				<div class="alumnForm">
-					<form action="views/principal.html">
-						<table id="form">
-							<tr>
-								<td>
-									<input type="text" class="form-control" name="search" placeholder="Buscar CI" required>
-								</td>
-							</tr>
+				<div class="row">
+					<div id="alumnSearch" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div>
+							<form>
+								<table id="form">
+									<tr>
+										<td>
+											<input type="text" class="form-control" name="search" placeholder="Buscar CI" required>
+										</td>
+									</tr>
+									<tr>
+										<td>
+			 								<p>ó</p>
+										</td>
+									</tr>									
+								</table>
+							</form>
+						</div>
+						<div id ="addAlumnForm" ng-controller="FormController as formCtrl">
+							<div ng-show="formCtrl.myVar">
+				           	<form ng-submit="formCtrl.submitForm()">
+				                <table id="form">
+				                	<tr>
+				                        <td>
+				                        	<label for="id">CI</label>
+				                            <input type="text" class="form-control" name="id" placeholder="Cédula de Identidad" ng-model="formCtrl.form.ci" required>
+				                        </td>
+				                    </tr>
+				                    <tr>
+				                        <td>
+				                        	<label for="name">Nombre</label>
+				                            <input type="text" class="form-control" name="name" placeholder="Nombre" ng-model="formCtrl.form.name" required>
+				                        </td>
+				                    </tr>
+				                    <tr>
+				                        <td>
+				                            <label for="apellido">Apellido</label>
+				                            <input type="text" class="form-control" name="apellido" placeholder="Apellido" ng-model="formCtrl.form.lastName" required>
+				                        </td>
+				                    </tr>
+				                    <tr>
+				                        <td>
+				                            <label for="address">Dirección</label>
+				                            <input type="text" class="form-control" name="address" ng-model="formCtrl.form.address" placeholder="Dirección">
+				                        </td>
+				                    </tr>
+				                    <tr>
+				                        <td>
+				                            <label for="numTel">Número Telefónico</label>
+				                            <input type="text" class="form-control" name="numTel" ng-model="formCtrl.form.phone" placeholder="04XXYYYYYYY">
+				                        </td>
+				                    </tr>
+				                    <tr>
+				                        <td>
+				                            <label for="Email">Email</label>
+				                            <input type="email" class="form-control" name="email" ng-model="formCtrl.form.email" placeholder="correo@dominio.com">
+				                        </td>
+				                    </tr>
+				                </table>
+				             	<div class="addField">
+				             		<input class="btn btn-success" type="Submit" value="Agregar Alumno" />
+				             	</div>	
+				             	
+				            </form>
+				            </div>
+				            <div class="addField">
+					            <!--
+					            <button type="button" class="btn btn-primary" ng-click="formCtrl.toggle()"> 
+									Crear Nuevo <span class="glyphicon glyphicon-plus"></span>
+								</button>
+								-->
+								<button type="button" class="btn btn-primary" ng-click="formCtrl.toggle()"> 
+									{{formCtrl.toggleText}} <span class="glyphicon glyphicon-plus"></span>
+								</button>
 
-							<tr>
-								<td>
-	 								<a href="#">Crear Alumno</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<button type="button" class="btn btn-primary"> 
-									Agregar Alumno <span class="glyphicon glyphicon-plus"></span></button>
-								</td>
-							</tr>
-						</table>
-					</form>
+							</div>
+				        </div>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					    <div ng-controller="ListController as listCtrl">
+					        <h1>Lista de alumnos</h1>
+					        <table id ="alumnList" class="table" >
+					            <thead>
+					                <th>Nombre</th>
+					                <th colspan="2">Apellido</th>
+					            </thead>
+					            <tbody>
+					                <tr ng-repeat="brand in listCtrl.brands">
+					                    <td ng-bind="brand.name"></td>
+					                    <td ng-bind="brand.lastName"></td>
+					                    <td class="text-right"><button class="btn glyphicon glyphicon-remove" ng-click="listCtrl.removeBrand($index)"></button></td>
+					                </tr>
+					            </tbody>
+					        </table>
+					    </div>
+					</div>
 				</div>
 			</div>
-
-			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 			</div>
 		</div>
-		
 	</div>
 
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="../app/js/aliadas.js"></script>
-	<script type="text/javascript" src="../app/css/js/bootstrap.min.js"></script>	
+<script>
+var app = angular.module("myApp", [])
+//var app = angular.module("myApp", ['ngAnimate', 'ui.bootstrap'])
+.controller("FormController", ["$http", "BrandService", function($http, BrandService){
+    var ctrl = this;
+    ctrl.form = {
+        ci: "",
+        name: "",
+        lastName: "",
+        address: "",
+        phone: "",
+        email: ""
+    };
+   
+    ctrl.myVar = false;
+    ctrl.toggleText = "Abrir Formulario";
+
+    ctrl.toggle = function() {
+        ctrl.myVar = !ctrl.myVar;
+        ctrl.toggleText = "Cerrar Formulario";
+
+    };
+
+    ctrl.submitForm = function(){
+        $http
+            //.post("/admin.brands/update", ctrl.form)
+            .post("", ctrl.form)
+            .then(function(resp){
+                console.log(resp);
+                
+                // Example to update the brand service
+                BrandService.add(ctrl.form);
+                ctrl.form = {
+        			ci: "",
+                    name: "",
+                    lastName: "",
+                    address: "",
+			        phone: "",
+        			email: ""
+                };
+                // when successfully submitted
+                
+            }, function(err){
+                console.log(err);
+                
+                // Not supposed to do this here, but just to Example updating the brand service
+                BrandService.add(ctrl.form);
+                ctrl.form = {
+        			ci: "",
+                    name: "",
+                    lastName: "",
+                    address: "",
+			        phone: "",
+        			email: ""
+                };
+                // When got some error
+            });
+    };
+}])
+.controller("ListController", ["$http", "BrandService", function($http, BrandService){
+    var ctrl = this;
+    
+    ctrl.brands = BrandService.get();
+    ctrl.removeBrand = BrandService.remove;
+}])
+.factory("BrandService", function(){
+    var brandList = [];
+    
+    return {
+        get: function(){
+            return brandList;
+        },
+        add: function(newBrand){
+            brandList.push(newBrand);
+        },
+        remove: function(index){
+            brandList.splice(index, 1);
+        }
+    };
+});
+
+angular.bootstrap(document, ['myApp']);
+
+</script>
 </body>
 </html>
 

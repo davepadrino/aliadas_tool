@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="../app/css/responsive.css"/> 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
 </head>
 <body>
 	<header>
@@ -67,11 +68,11 @@
 				<div>
 					<h2> Crear Curso </h2>
 				</div>
-				<form action="views/principal.html">
+				<form action="add_alumn.html">
 					<table id="form">
 						<tr>
 							<td>
-								<input type="text" class="form-control" name="email" placeholder="Nombre del Curso" required>
+								<input type="text" class="form-control" name="text" placeholder="Nombre del Curso" required>
 							</td>
 						</tr>
 
@@ -87,14 +88,10 @@
 						</tr>
 						<tr>
 							<td>
-								<button type="button" class="btn btn-primary"> Agregar Curso </button>
+								<button type="submit" class="btn btn-primary"> Agregar Curso </button>
 							</td>
 						</tr>
-						<tr>
-							<td>
-								<a id = "add_alumn" href="add_alumn.html"> Agregar Alumnos </a>
-							</td>
-						</tr>
+
 					</table>
 				</form>
 

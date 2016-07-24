@@ -154,6 +154,63 @@ header nav ul li .children li a{
 	display: block;
 }
 
+
+/* Botones en agregar alumno*/
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.button2 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #023859;
+}
+
+.button2:hover {
+    background-color: #023859;
+    color: white;
+}
+
+
+/* Agregar alumno*/	
+
+#alumnSearch{
+	border: 2px ridge black;
+	border-radius: 10px;
+	border-color: #023859;	
+}
+
+#alumnSearch form input{
+	margin-top: 20px;
+}
+
+
+.addField {
+	text-align: center;
+	margin: 5px;
+}
+
+.modal-body label{
+	text-align: left;
+}
+
+#alumnList th{
+	width: 50%;
+}
+
+
 /* ############### */
 
 .tabs {
