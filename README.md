@@ -34,11 +34,11 @@ Tareas
 -- Nombre Generado Automáticamente?
 
 - AGREGAR ALUMNOS
-- Responsive
+- 
 
 - GESTIONAR USUARIOS
 -- Ver los usuarios existentes
--- Poder editar y borrar los usuarios existentes y crear nuevos usuarios
+-- Poder borrar los usuarios existentes
 
 - VISTAS DE LOS CURSOS
 -- Ver historial de los cursos creados, status, alumnos, notas final/tipo de proyecto 

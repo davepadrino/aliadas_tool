@@ -57,7 +57,7 @@
 				</li>
 				<div class="control-top">
 					<ul>
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Administrar Usuarios</a></li>					
+						<li><a href="manage_users.html"><span class="glyphicon glyphicon-user"></span> Administrar Usuarios</a></li>					
 						<li><a href="../index.html"><span class="glyphicon glyphicon-off"></span> Cerrar Sesión</a></li>					
 					</ul>
 				</div>
@@ -151,10 +151,10 @@
 							</div>
 				        </div>
 					</div>
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<div id ="alumnList" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					    <div ng-controller="ListController as listCtrl">
 					        <h1>Lista de alumnos</h1>
-					        <table id ="alumnList" class="table" >
+					        <table  class="table" >
 					            <thead>
 					                <th>Nombre</th>
 					                <th colspan="2">Apellido</th>
@@ -178,7 +178,6 @@
 
 <script>
 var app = angular.module("myApp", [])
-//var app = angular.module("myApp", ['ngAnimate', 'ui.bootstrap'])
 .controller("FormController", ["$http", "BrandService", function($http, BrandService){
     var ctrl = this;
     ctrl.form = {

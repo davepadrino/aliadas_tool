@@ -17,6 +17,7 @@
 		width: 100%;
 		position: fixed;
 		top: 0;
+		z-index: 1000;
 		background-color: #023859;
 	}
 	.menu-bar .bt-menu{
@@ -151,6 +152,18 @@
 		width: 100%;
 		float: left;
 	}
+
+
 }
 
+@media (max-width: 935px) {
+	/* Add Alumn*/
 
+	#alumnSearch{
+		width: 100%;
+	}
+
+	#alumnList{
+		width: 100%;
+	}
+}

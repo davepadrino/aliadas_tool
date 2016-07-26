@@ -187,6 +187,7 @@ header nav ul li .children li a{
 /* Agregar alumno*/	
 
 #alumnSearch{
+	width: 50%;
 	border: 2px ridge black;
 	border-radius: 10px;
 	border-color: #023859;	
@@ -204,6 +205,10 @@ header nav ul li .children li a{
 
 .modal-body label{
 	text-align: left;
+}
+
+#alumnList{
+	width: 50%;
 }
 
 #alumnList th{
