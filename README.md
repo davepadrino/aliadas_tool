@@ -17,7 +17,6 @@ reestructurar la cosa en 2 mitades de pantalla, en una creo gente, en otra la vo
 Tareas
 
 - GENERAL
--- Colocar fecha y día?
 -- Agregar Personas que no pertenezcan a un curso especifico?
 -- Usuario administrador o cualquiera puede crear otros usuarios?
 
@@ -42,3 +41,5 @@ Tareas
 
 - VISTAS DE LOS CURSOS
 -- Ver historial de los cursos creados, status, alumnos, notas final/tipo de proyecto 
+
+# FINAL DE README
