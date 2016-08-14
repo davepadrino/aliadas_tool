@@ -72,6 +72,12 @@ table {
 	float:right;
 }
 
+.switch-wrapper {
+  display: inline-block;
+  position: relative;
+  top: 3px;
+}
+
 /* hola class="nav navbar-nav menu-options"*/
 
 *{
@@ -139,7 +145,7 @@ header nav ul li .children{ 		/*los hijos deben ser absolute */
 	display: none;
 	background: #011826;
 	position: absolute;
-	width: 150%;
+	width: 100%;
 	z-index: 1000;
 }
 
@@ -194,7 +200,7 @@ header nav ul li .children li a{
 }
 
 #alumnSearch form input{
-	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 
@@ -216,65 +222,7 @@ header nav ul li .children li a{
 }
 
 
+
+
+
 /* ############### */
-
-.tabs {
-  width: 100%;
-  float: none;
-  list-style: none;
-  position: relative;
-  /* margin: 80px 0 0 10px; */
-  text-align: left;
-}
-.tabs li {
-  float: left;
-  display: block;
-}
-.tabs input[type="radio"] {
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
-}
-.tabs label {
-  display: block;
-  padding: 14px 21px;
-  border-radius: 10px;
-  text-transform: uppercase;
-  background: #023859;
-  cursor: pointer;
-  position: relative;
-  top: 4px;
-  color: white;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-.tabs label:hover {
-  background: #2ECCFA;
-}
-.tabs .tab-content {
-  z-index: 2;
-  display: none;
-  overflow: hidden;
-  width: 100%;
-  font-size: 17px;
-  line-height: 25px;
-  padding: 25px;
-  position: absolute;
-  top: 53px;
-  left: 0;
-}
-.tabs [id^="tab"]:checked + label {
-  top: 0;
-  padding-top: 17px;
-}
-.tabs [id^="tab"]:checked ~ [id^="tab-content"] {
-  display: block;
-}
-
-
-
-.tabs p, label{
-	color:black;
-}

@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
@@ -10,6 +11,7 @@
 </head>
 
 <body >
+<!--
 <div class="container">
     <div ng-controller="ListController as listCtrl">
         <h1>Brands List</h1>
@@ -28,7 +30,7 @@
         </table>
     </div>
 
-    <!-- MODAL -->
+    
     <div ng-controller="FormController as formCtrl">
             <form ng-submit="formCtrl.submitForm()">
                     <table id="form">
@@ -63,12 +65,11 @@
                             </td>
                         </tr>
                     </table>
-                <!--
                 <button class="btn btn-primary" type="submit" ng-click="ok()">Guardar</button>
-                -->
                 <input class="btn btn-success" type="Submit" value="Add Brand" />
                 </form>
         </div>
+                -->
 
 
     <!-- 
@@ -85,10 +86,29 @@
     </div>
 </div>
     -->
+
+
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <label><i class="fa fa-globe"></i> State</label>
+        <input class="form-control" ng-model="selectedState" bs-options="state for state in states" placeholder="Enter state" bs-typeahead type="text">
+      </div>
+      <div class="form-group">
+        <label>Icon</label>
+        <input class="form-control" ng-model="selectedIcon" data-min-length="0" data-html="1" data-auto-select="true" data-animation="am-flip-x" bs-options="icon as icon.label for icon in icons" placeholder="Enter icon" bs-typeahead type="text">
+      </div>
+      <hr>
+      <!-- Using an async data provider -->
+      <div class="form-group">
+        <label><i class="fa fa-home"></i> Address <small>(async via maps.googleapis.com)</small></label>
+        <input class="form-control" ng-model="selectedAddress" data-animation="am-flip-x" bs-options="address.formatted_address as address.formatted_address for address in getAddress($viewValue)" placeholder="Enter address" bs-typeahead type="text">
+      </div>
+    </form>
+
+    
 </body>
-
 <script>
-
+/*
 var app = angular.module("myApp", [])
 //var app = angular.module("myApp", ['ngAnimate', 'ui.bootstrap'])
 .controller("FormController", ["$http", "BrandService", function($http, BrandService){

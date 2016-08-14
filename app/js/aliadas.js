@@ -19,10 +19,17 @@ $(document).ready(function(){
 	});
 
 		//Mostrar y ocultar sub-menu
-	$('.submenu').click(function(){
+	$('#sm1').click(function(){
 		//$(this).children('.children').slideToggle();
-		$('.children').slideToggle();
+		$('#childrenSM1').slideToggle();
 	});
+
+	//Mostrar y ocultar sub-menu
+	$('#sm2').click(function(){
+		//$(this).children('.children').slideToggle();
+		$('#childrenSM2').slideToggle();
+	});
+
 
 });
 		/* Validación de passwords*/

@@ -16,30 +16,20 @@ reestructurar la cosa en 2 mitades de pantalla, en una creo gente, en otra la vo
 
 Tareas
 
-- GENERAL
--- Agregar Personas que no pertenezcan a un curso especifico?
--- Usuario administrador o cualquiera puede crear otros usuarios?
+-BARRAS DE BÚSQUEDA
+-- Hacer las cosas con AngularJS
+-- Probar que se guarden cosas en un objeto de angular
 
+
+-EDITAR CURSO
+-- Permitir agregar alumno por busqueda o por formulario a través de un modal
+-- Permitir editar alumno a traves d eun modal
 
 - INDEX
 -- Manejo de sesión
 
-- PRINCIPAL	
--- Ver Cursos no finalizados en las pestañas
--- Permitir pasar asistencia (opcional)
-
-
-- AGREGAR CURSO
--- Nombre Generado Automáticamente?
-
-- AGREGAR ALUMNOS
-- 
-
-- GESTIONAR USUARIOS
--- Ver los usuarios existentes
--- Poder borrar los usuarios existentes
-
-- VISTAS DE LOS CURSOS
--- Ver historial de los cursos creados, status, alumnos, notas final/tipo de proyecto 
 
 # FINAL DE README
+
+
+

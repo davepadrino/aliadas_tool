@@ -10,6 +10,8 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="../app/css/responsive.css"/> 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 	<title>Principal - Aliadas en Cadena</title>
 </head>
 <body>
@@ -22,7 +24,14 @@
 					</a>
 				</div>
 			</div>
-			<div class="col-md-5 col-md-5">	</div>
+			<div class="col-md-5 col-md-5">	
+			    <div class="input-group">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button">Buscar</button>
+			      </span>
+			      <input type="text" class="form-control" placeholder="Buscar alumno...">
+			    </div>
+			</div>
 			<div class="col-md-4 col-md-4">
 				<div class="control-top">Hola, Usuario</div>
 			</div>	
@@ -37,12 +46,12 @@
 				<li><a href="principal.html"><span class="glyphicon glyphicon-glyphicon glyphicon-home"></span> Inicio </a></li>
 				<li><a href="add_course.html"><span class="glyphicon  glyphicon-new-window"></span>
 				Agregar Curso </a></li>		
-				<li class="submenu">
+				<li id ="sm1" class="submenu">
 					<a href="#">
 						<span class="glyphicon glyphicon-grain"> Asistencia / Notas
 						<span class="caret"></span>
 					</a>
-					<ul class="children">
+					<ul id="childrenSM1" class="children">
 						<li><a href="#">Mujeres Emprendedoras</a></li>
 						<li><a href="#">Escuela - Taller</a></li>
 						<li><a href="#">Mujeres Hacedoras</a></li>
@@ -51,36 +60,61 @@
 				</li>
 				<div class="control-top">
 					<ul>
-						<li><a href="manage_users.html"><span class="glyphicon glyphicon-user"></span> Administrar Usuarios</a></li>					
-						<li><a href="../index.html"><span class="glyphicon glyphicon-off"></span> Cerrar Sesión</a></li>					
+						<li><a href="manage_users.html"><span class="glyphicon glyphicon-user"></span> Administrar Usuarios</a></li>
+						<li id ="sm2" class="submenu">
+							<a href="#">
+								<span class="glyphicon glyphicon-cog"> Configuración
+								<span class="caret"></span></span>	
+							</a>
+							<ul id="childrenSM2" class="children">	
+								<li><a href="edit_user.html"><span class="glyphicon glyphicon-pencil"></span> Editar Usuario</a></li>			
+								<li><a href="../index.html"><span class="glyphicon glyphicon-off"></span> Cerrar Sesión</a></li>	
+							</ul>	
+						</li>
 					</ul>
 				</div>
 			</ul>
 		</nav>
 	</header>
 	<div id="principal">
-		<ul class="tabs">
-			<li>
-				<input type="radio" name="tabs" id="tab1" checked />
-				<label for="tab1">Description</label>
-			    <div id="tab-content1" class="tab-content">
-				    <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-			    </div>
-			</li>				  
-			<li>
-				<input type="radio" name="tabs" id="tab2" />
-				<label for="tab2">Specification</label>
-				<div id="tab-content2" class="tab-content">
-				        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo oluptas nulla?</p>
-		        </div>
-		    </li>
-		</ul>
+		<h2>Cursos Actuales</h2>
+	    <div>
+			<table class="row table" >
+			    <thead>
+					<div class="col-md-3">		    					
+					    <th>Nombre del Curso</th>
+					    <th>Tipo del Curso</th>
+					    <th >Fecha de Inicio</th>
+					    <th >Fecha de Fin</th>
+			    	</div>
+			    </thead>
+			    <tbody>
+			        <tr>
+		    			<div class="col-md-3">
+			        	    <td><a href="edit_course.html">Curso 1</a></td>
+				            <td>Tipo 1</td>
+				            <td>xx/xx/xx</td>
+				            <td>xx/xx/xx</td>
+				        </div>
+			        </tr>
+			        <tr>
+		    			<div class="col-md-4">
+			        	    <td><a href="edit_course.html">Curso 2</a></td>
+				            <td>Tipo 2</td>
+				            <td>xx/xx/xx</td>
+				            <td>xx/xx/xx</td>
+				        </div>
+			        </tr>
+			    </tbody>
+		    </table>
+		</div>
 	</div>
 
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="../app/js/aliadas.js"></script>
 	<script type="text/javascript" src="../app/css/js/bootstrap.min.js"></script>	
+
 </body>
 </html>
 
