@@ -17,13 +17,15 @@ reestructurar la cosa en 2 mitades de pantalla, en una creo gente, en otra la vo
 Tareas
 
 -BARRAS DE BÚSQUEDA
--- Hacer las cosas con AngularJS
--- Probar que se guarden cosas en un objeto de angular
+-- Mostrar info de Alumno en un modal
+-- Permitir editar alumno a traves de un modal
 
 
 -EDITAR CURSO
 -- Permitir agregar alumno por busqueda o por formulario a través de un modal
--- Permitir editar alumno a traves d eun modal
+
+- Buscar Alumno en la creación de curso
+-- La busqueda tipo AJAX se pegara con BD y no con el arreglo en angular
 
 - INDEX
 -- Manejo de sesión

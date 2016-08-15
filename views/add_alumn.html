@@ -17,6 +17,18 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="../example.js"></script>
 
+	<!-- #######################################################################-->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/libs.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/docs.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular-sanitize.min.js" data-semver="1.5.5"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.js" data-semver="v2.3.8"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.3.8"></script>
+    <script src="//mgcrea.github.io/angular-strap/docs/angular-strap.docs.tpl.js" data-semver="v2.3.8"></script>
+
+
 </head>
 <body ng-app="myApp">
 	<header>
@@ -92,12 +104,17 @@
 				<div class="row">
 					<div id="alumnSearch" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						<div>
-							<form>
+							<form ng-controller="TypeaheadDemoCtrl">
 								<table id="form">
 									<tr>
 										<td>
+											<div class="input-group">
 											<label for="search">Buscar Alumno</label>
-											<input type="text" class="form-control" name="search">
+												<input type="text" class="form-control" name="search" ng-model="selected" bs-options="state.ci for state in brandList" bs-typeahead>
+												<span class="input-group-btn">
+						                        <button class="btn btn-default" ng-click="addToList(selected)" type="button">Agregar</button>
+						                    </span>				
+											</div>
 										</td>
 									</tr>								
 								</table>
@@ -165,7 +182,7 @@
 					</div>
 					<div id ="alumnList" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 					    <div ng-controller="ListController as listCtrl">
-					        <h1>Lista de alumnos</h1>
+					        <h1>Lista de alumnos inscritos</h1>
 					        <table  class="table" >
 					            <thead>
 					                <th>Nombre</th>
@@ -190,7 +207,64 @@
 	<script type="text/javascript" src="../app/js/aliadas.js"></script>
 
 <script>
-var app = angular.module("myApp", [])
+//var app = angular.module("myApp", [])
+ var app = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'mgcrea.ngStrap'])
+
+
+    .controller('TypeaheadDemoCtrl', function($scope, $templateCache, $http, BrandService) {
+
+    $scope.selected = '';
+    $scope.brandList = BrandService.get();
+
+    /*
+    $scope.form = {
+        ci: "",
+        name: "",
+        lastName: "",
+        address: "",
+        phone: "",
+        email: ""
+    };
+    */
+    $scope.addToList = function() {
+        //BrandService.add($scope.selected);
+        //alert($scope.selected.name);
+        list = BrandService.get();
+        console.log($scope.selected);
+        console.log($scope.selected in list);
+        var flag = 0;
+        for (var i = 0; i < list.length; i++) {
+            if($scope.selected.ci === list[i]["ci"]){
+                alert("El alumno ya esta inscrito");
+                flag = 1; // 1 para inscrito
+                break;
+            }
+        }
+             $http
+                    .post("", $scope.selected)
+                    .then(function(resp){
+                        console.log(resp);
+                        
+                        // Example to update the brand service
+                        $scope.form = {
+                            ci: $scope.selected.ci,
+                            name: $scope.selected.name,
+                            lastName: $scope.selected.lastName,
+                            address: $scope.selected.address,
+                            phone: $scope.selected.phone,
+                            email: $scope.selected.email
+                        };
+                        if ($scope.selected != '' && flag != 1 && $scope.selected.name != undefined){
+                            BrandService.add($scope.form);
+                        }
+                        // when successfully submitted
+                                                
+                    });
+    };
+})
+
+
+
 .controller("FormController", ["$http", "BrandService", function($http, BrandService){
     var ctrl = this;
     ctrl.form = {
@@ -253,8 +327,17 @@ var app = angular.module("myApp", [])
     ctrl.brands = BrandService.get();
     ctrl.removeBrand = BrandService.remove;
 }])
+
 .factory("BrandService", function(){
-    var brandList = [];
+    var brandList = [{
+        name: "Name1",
+        lastName: "LastName1",
+        ci: "20328774"
+    }, {
+        name: "Name2",
+        lastName: "LastName2",
+        ci: "213234234"
+    }];
     
     return {
         get: function(){

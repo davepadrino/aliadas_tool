@@ -1,17 +1,237 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="mgcrea.ngStrapDocs">
 
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
-    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.0.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/libs.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/docs.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular.min.js" data-semver="1.5.5"></script>
+    <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular-animate.min.js" data-semver="1.5.5"></script>
+    <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular-sanitize.min.js" data-semver="1.5.5"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.js" data-semver="v2.3.8"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.3.8"></script>
+    <script src="//mgcrea.github.io/angular-strap/docs/angular-strap.docs.tpl.js" data-semver="v2.3.8"></script>
 </head>
 
-<body >
+
+<body>
+
+            <form ng-controller="TypeaheadDemoCtrl" class="form-inline">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="selected" bs-options="state.ci for state in brandList" placeholder="Enter state" bs-typeahead>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="addToList(selected)" type="button">Agregar</button>
+                    </span>
+                </div>
+            </form>
+                    <div id ="alumnList" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div ng-controller="ListController as listCtrl">
+                            <h1>Lista de alumnos</h1>
+                            <table  class="table" >
+                                <thead>
+                                    <th>Nombre</th>
+                                    <th colspan="2">Apellido</th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="brand in listCtrl.brands">
+                                        <td ng-bind="brand.name"></td>
+                                        <td ng-bind="brand.lastName"></td>
+                                        <td class="text-right"><button class="btn glyphicon glyphicon-remove" ng-click="listCtrl.removeBrand($index)"></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+ 
+
+<script>
+    var app = angular.module('mgcrea.ngStrapDocs', ['ngAnimate', 'ngSanitize', 'mgcrea.ngStrap'])
+
+
+
+    .controller('TypeaheadDemoCtrl', function($scope, $templateCache, $http, BrandService, $modal) {
+
+    $scope.selected = '';
+    $scope.brandList = BrandService.get();
+
+    /*
+    $scope.form = {
+        ci: "",
+        name: "",
+        lastName: "",
+        address: "",
+        phone: "",
+        email: ""
+    };
+    */
+    $scope.addToList = function() {
+        //BrandService.add($scope.selected);
+        //alert($scope.selected.name);
+        list = BrandService.get();
+        var flag = 0;
+        for (var i = 0; i < list.length; i++) {
+            if($scope.selected.ci === list[i]["ci"]){
+                alert("El alumno ya esta inscrito");
+                flag = 1; // 1 para inscrito
+                break;
+            }
+        }
+            //else{
+                $http
+                    .post("", $scope.selected)
+                    .then(function(resp){
+                        console.log(resp);
+                        
+                        // Example to update the brand service
+                        $scope.form = {
+                            ci: $scope.selected.ci,
+                            name: $scope.selected.name,
+                            lastName: $scope.selected.lastName,
+                            address: $scope.selected.address,
+                            phone: $scope.selected.phone,
+                            email: $scope.selected.email
+                        };
+                        console.log($scope.selected.name == undefined)
+                        if ($scope.selected != '' && flag != 1 && $scope.selected.name != undefined){
+                            BrandService.add($scope.form);
+                        }
+                        // when successfully submitted
+                                                
+                    });
+          //}
+        //}
+    };
+
+})
+
+
+.controller("FormController", ["$http", "BrandService", function($http, BrandService){
+    var ctrl = this;
+    ctrl.form = {
+        ci: "",
+        name: "",
+        lastName: "",
+        address: "",
+        phone: "",
+        email: ""
+    };
+   
+    ctrl.myVar = false;
+    ctrl.toggleText = "Abrir Formulario";
+
+    ctrl.toggle = function() {
+        ctrl.myVar = !ctrl.myVar;
+        ctrl.toggleText = "Cerrar Formulario";
+
+    };
+
+    ctrl.submitForm = function(){
+        $http
+            //.post("/admin.brands/update", ctrl.form)
+            .post("", ctrl.form)
+            .then(function(resp){
+                console.log(resp);
+                
+                // Example to update the brand service
+                BrandService.add(ctrl.form);
+                ctrl.form = {
+                    ci: "",
+                    name: "",
+                    lastName: "",
+                    address: "",
+                    phone: "",
+                    email: ""
+                };
+                // when successfully submitted
+                
+            }, function(err){
+                console.log(err);
+                
+                // Not supposed to do this here, but just to Example updating the brand service
+                BrandService.add(ctrl.form);
+                ctrl.form = {
+                    ci: "",
+                    name: "",
+                    lastName: "",
+                    address: "",
+                    phone: "",
+                    email: ""
+                };
+                // When got some error
+            });
+    };
+}])
+.controller("ListController", ["$http", "BrandService", function($http, BrandService){
+    var ctrl = this;
+    
+    ctrl.brands = BrandService.get();
+    ctrl.removeBrand = BrandService.remove;
+}])
+
+.factory("BrandService", function(){
+    var brandList = [{
+        name: "Name1",
+        lastName: "LastName1",
+        ci: "20328774"
+    }, {
+        name: "Name2",
+        lastName: "LastName2",
+        ci: "213234234"
+    }];
+    
+    return {
+        get: function(){
+            return brandList;
+        },
+        add: function(newBrand){
+            brandList.push(newBrand);
+        },
+        remove: function(index){
+            brandList.splice(index, 1);
+        }
+    };
+});
+
+angular.bootstrap(document, ['mgcrea.ngStrapDocs']);    
+
+
+</script>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
+<body >
 <div class="container">
     <div ng-controller="ListController as listCtrl">
         <h1>Brands List</h1>
@@ -87,26 +307,6 @@
 </div>
     -->
 
-
-    <form class="form-inline" role="form">
-      <div class="form-group">
-        <label><i class="fa fa-globe"></i> State</label>
-        <input class="form-control" ng-model="selectedState" bs-options="state for state in states" placeholder="Enter state" bs-typeahead type="text">
-      </div>
-      <div class="form-group">
-        <label>Icon</label>
-        <input class="form-control" ng-model="selectedIcon" data-min-length="0" data-html="1" data-auto-select="true" data-animation="am-flip-x" bs-options="icon as icon.label for icon in icons" placeholder="Enter icon" bs-typeahead type="text">
-      </div>
-      <hr>
-      <!-- Using an async data provider -->
-      <div class="form-group">
-        <label><i class="fa fa-home"></i> Address <small>(async via maps.googleapis.com)</small></label>
-        <input class="form-control" ng-model="selectedAddress" data-animation="am-flip-x" bs-options="address.formatted_address as address.formatted_address for address in getAddress($viewValue)" placeholder="Enter address" bs-typeahead type="text">
-      </div>
-    </form>
-
-    
-</body>
 <script>
 /*
 var app = angular.module("myApp", [])
@@ -220,7 +420,6 @@ demo.directive("boxCreator", function($compile){
     }
    });
 */
-</script>
 
 
-</html>
+

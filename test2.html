@@ -16,21 +16,14 @@
     <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.js" data-semver="v2.3.8"></script>
     <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.3.8"></script>
     <script src="//mgcrea.github.io/angular-strap/docs/angular-strap.docs.tpl.js" data-semver="v2.3.8"></script>
-    <script src="app.js"></script>
   </head>
 
   <body ng-controller="MainCtrl">
-
-  <div class="bs-docs-section" ng-controller="TypeaheadDemoCtrl">
-    <div class="bs-example" style="padding-bottom: 24px;" append-source>
-    <form class="form-inline" role="form">
-      <div class="form-group">
-        <label><i class="fa fa-globe"></i> State</label>
-        <input type="text" class="form-control" ng-model="selectedState" bs-options="state for state in states" placeholder="Enter state" bs-typeahead>
-      </div>
-</form>
-</div>
-</div>
+    <div class="bs-docs-section" ng-controller="ModalDemoCtrl">
+        <button type="button" class="btn btn-lg btn-primary" data-animation="am-fade-and-scale" data-placement="center" bs-modal="modal">Click to toggle modal
+          <br />
+        </button>
+    </div>
 
 
 <script>
@@ -39,31 +32,12 @@ var app = angular.module('mgcrea.ngStrapDocs', ['ngAnimate', 'ngSanitize', 'mgcr
 app.controller('MainCtrl', function($scope) {
 });
 
-'use strict';
 
 angular.module('mgcrea.ngStrapDocs')
 
-.controller('TypeaheadDemoCtrl', function($scope, $templateCache, $http) {
+.controller('ModalDemoCtrl', function($scope, $modal) {
+  $scope.modal = {title: 'Title', content: 'Hello Modal<br />This is a multiline message!'};
 
-  $scope.selectedState = '';
-  $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
-  $scope.selectedIcon = '';
-  $scope.icons = [
-    {value: 'Gear', label: '<i class="fa fa-gear"></i> Gear'},
-    {value: 'Globe', label: '<i class="fa fa-globe"></i> Globe'},
-    {value: 'Heart', label: '<i class="fa fa-heart"></i> Heart'},
-    {value: 'Camera', label: '<i class="fa fa-camera"></i> Camera'}
-  ];
-
-  $scope.selectedAddress = '';
-  $scope.getAddress = function(viewValue) {
-    var params = {address: viewValue, sensor: false};
-    return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {params: params})
-    .then(function(res) {
-      return res.data.results;
-    });
-  };
 
 });
 
