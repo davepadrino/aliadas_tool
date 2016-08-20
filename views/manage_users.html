@@ -17,8 +17,18 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="../example.js"></script>
 
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/libs.min.css">
+    <link rel="stylesheet" href="//mgcrea.github.io/angular-strap/styles/docs.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="//cdn.jsdelivr.net/angularjs/1.5.5/angular-sanitize.min.js" data-semver="1.5.5"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.js" data-semver="v2.3.8"></script>
+    <script src="//mgcrea.github.io/angular-strap/dist/angular-strap.tpl.js" data-semver="v2.3.8"></script>
+    <script src="//mgcrea.github.io/angular-strap/docs/angular-strap.docs.tpl.js" data-semver="v2.3.8"></script>
+
 </head>
-<body ng-app ="myApp">
+<body>
 	<header>
 		<div id="menu-fijo" class="row">
 			<div class="logo col-md-3 col-md-3">
@@ -30,7 +40,7 @@
 			</div>
 			<div class="col-md-5 col-md-5">	</div>
 			<div class="col-md-4 col-md-4">
-				<div class="control-top">Hola, Usuario</div>
+				<div class="control-top">Hola, Administrador</div>
 			</div>	
 		</div>	
 		<div class="menu-bar">
@@ -40,36 +50,7 @@
 		</div>
 		<nav>
 			<ul>
-				<li><a href="principal.html"><span class="glyphicon glyphicon-glyphicon glyphicon-home"></span> Inicio </a></li>
-				<li><a href="add_course.html"><span class="glyphicon  glyphicon-new-window"></span>
-				Agregar Curso </a></li>		
-				<li id ="sm1" class="submenu">
-					<a href="#">
-						<span class="glyphicon glyphicon-grain"> Asistencia / Notas
-						<span class="caret"></span>
-					</a>
-					<ul id="childrenSM1" class="children">
-						<li><a href="#">Mujeres Emprendedoras</a></li>
-						<li><a href="#">Escuela - Taller</a></li>
-						<li><a href="#">Mujeres Hacedoras</a></li>
-					</ul>
-					</span>
-				</li>
-				<div class="control-top">
-					<ul>
-						<li><a href="manage_users.html"><span class="glyphicon glyphicon-user"></span> Administrar Usuarios</a></li>
-						<li id ="sm2" class="submenu">
-							<a href="#">
-								<span class="glyphicon glyphicon-cog"> Configuración
-								<span class="caret"></span></span>	
-							</a>
-							<ul id="childrenSM2" class="children">	
-								<li><a href="edit_user.html"><span class="glyphicon glyphicon-pencil"></span> Editar Usuario</a></li>			
-								<li><a href="../index.html"><span class="glyphicon glyphicon-off"></span> Cerrar Sesión</a></li>	
-							</ul>	
-						</li>
-					</ul>
-				</div>
+				<li><a id ="element" href="../index.html"><span class="glyphicon glyphicon-off"></span> Cerrar Sesión</a></li>	
 			</ul>
 		</nav>
 	</header>
@@ -83,73 +64,77 @@
 					<h2> Administrar Usuarios </h2>
 				</div>
 				<div class="row">
-					<div ng-controller="showInput" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<div>
-							<h3> Editar Mi Usuario</h3>
-						</div>
-						<form action="manage_users.html">
-								<table id="form">
-									<tr>
-				                        <td>
-				                        	<label for="name">Nombre</label>
-				                            <input type="text" class="form-control" name="name" placeholder="Nombre" required>
-				                        </td>
-				                    </tr>
-				                    <tr>
-				                        <td>
-				                            <label for="password">Contraseña</label>
-				                            <input type="password" class="form-control" name="password" ng-focus="showfields()" placeholder="********">
-				                    	</td>
-				                    </tr>
-				                    <div>
-				                    	<tr ng-show="myFlag">
-											<td>
-												<input type="password" class="form-control" id="newPass1" name="newPass1" placeholder="Indique nueva contraseña" ng-focus="showfields()">
-											</td>
-										</tr>
-										<tr ng-show="myFlag">
-											<td>
-												<input type="password" class="form-control" id="newPass2" name="newPass2" placeholder="Indique nuevamente Contraseña" ng-focus="showfields()" >
-												<span id="confirmMessage">  </span>
-											</td>
-										</tr>
-				                    </div>
-				                </table>
-				             	<div class="addField">
-				             		<input class="btn btn-success" type="Submit" value="Editar mi Usuario" />
-				             	</div>	
-				             	
-				            </form>
-					</div>
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<div>
+						<div ng-controller="FormController as formCtrl">
 							<div>
 								<h3> Crear Usuario</h3>
 							</div>
+						<form ng-submit="formCtrl.submitForm()">
 							<table id="form">
 									<tr>
 				                        <td>
-				                        	<label for="name">Nombre</label>
-				                            <input type="text" class="form-control" name="name" placeholder="Nombre" required>
+				                        	<label for="name">Nombre de Usuario</label>
+				                            <input type="text" class="form-control" name="name" placeholder="Nombre" ng-model="formCtrl.form.username" required>
 				                        </td>
 				                    </tr>
 				                   	<tr>
 				                        <td>
 				                            <label for="Email">Email</label>
-				                            <input type="email" class="form-control" name="email" placeholder="correo@dominio.com">
+				                            <input type="email" class="form-control" name="email" placeholder="correo@dominio.com" ng-model="formCtrl.form.email">
 				                        </td>
 				                    </tr>
 				                    <tr>
 				                        <td>
 				                            <label for="password">Contraseña</label>
-				                            <input type="password" class="form-control" name="password" placeholder="********">
+				                            <input type="password" class="form-control" name="password" placeholder="********" ng-model="formCtrl.form.psw">
 				                        </td>
 				                    </tr>
+				                    <tr>
+				                        <td>
+				                            <label for="role">Tipo de Usuario</label>
+				                            <select class="form-control" name="role" ng-model="formCtrl.form.role">
+				                            	<option value="" disabled selected="selected">Seleccione...</option>
+												<option value="Especialista Docente">Especialista Docente</option>
+												<option value="Coordinadora">Coordinadora</option>		
+				                            </select>
+				                        </td>
+				                    </tr>
+				                    <tr>
+				                        <td>
+								            <div class="addField">
+								             	<input class="btn btn-success" type="Submit" value="Crear Usuario" />
+								            </div>
+				                        </td>
+				                    </tr>				                    
 				            </table>
-				            <div class="addField">
-				             	<input class="btn btn-success" type="Submit" value="Crear Usuario" />
-				            </div>	
+						</form>
 				        </div>
+						
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div>
+						    <div ng-controller="ListController as listCtrl">
+						        <h1>Usuarios</h1>
+						        <table  class="table" >
+						            <thead>
+						                <th>Nombre de Usuario</th>
+						                <th>Correo Electrónico</th>
+						                <th>Rol</th>
+						                <th>Editar</th>
+						                <th>Eliminar</th>
+						            </thead>
+						            <tbody>
+						                <tr ng-repeat="brand in listCtrl.brands">
+						                    <td ng-bind="brand.username"></td>
+						                    <td ng-bind="brand.email"></td>
+						                    <td ng-bind="brand.role"></td>
+						                    <td class="text-right"><button class="btn glyphicon glyphicon-pencil"></button></td>
+						                    <td class="text-right"><button class="btn glyphicon glyphicon-remove" ng-click="listCtrl.removeBrand($index)"></button></td>
+						                </tr>
+						            </tbody>
+						        </table>
+						    </div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -159,11 +144,80 @@
 	</div>
 
 <script>
-var app = angular.module("myApp", [])
-.controller('showInput', function ($scope) {
-	$scope.myFlag = false;
-    $scope.showfields = function() {
-    	$scope.myFlag = true;
+ var app = angular.module('myApp', ['ngAnimate', 'ngSanitize', 'mgcrea.ngStrap'])
+
+
+.controller("FormController", ["$http", "BrandService", function($http, BrandService){
+    var ctrl = this;
+    ctrl.form = {
+        username: "",
+        email: "",
+        psw: "",
+        role: ""
+    };
+   
+    ctrl.submitForm = function(){
+        $http
+            //.post("/admin.brands/update", ctrl.form)
+            .post("", ctrl.form)
+            .then(function(resp){
+                console.log(resp);
+                
+                // Example to update the brand service
+                BrandService.add(ctrl.form);
+			    ctrl.form = {
+			        username: "",
+			        email: "",
+			        psw: "",
+			        role: ""
+			    };
+                // when successfully submitted
+                
+            }, function(err){
+                console.log(err);
+                
+                // Not supposed to do this here, but just to Example updating the brand service
+                BrandService.add(ctrl.form);
+                ctrl.form = {
+				    username: "",
+				    email: "",
+				    psw: "",
+				    role: ""
+				};
+                // When got some error
+            });
+    };
+}])
+.controller("ListController", ["$http", "BrandService", function($http, BrandService){
+    var ctrl = this;
+    
+    ctrl.brands = BrandService.get();
+    ctrl.removeBrand = BrandService.remove;
+}])
+
+.factory("BrandService", function(){
+    var brandList = [{
+        username: "username1",
+        email: "email1",
+        psw: "",
+        role: "Role1"
+    }, {
+        username: "username2",
+        email: "email2",
+        psw: "",
+        role: "Role2"
+    }];
+    
+    return {
+        get: function(){
+            return brandList;
+        },
+        add: function(newBrand){
+            brandList.push(newBrand);
+        },
+        remove: function(index){
+            brandList.splice(index, 1);
+        }
     };
 });
 

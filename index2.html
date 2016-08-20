@@ -95,7 +95,6 @@
                             phone: $scope.selected.phone,
                             email: $scope.selected.email
                         };
-                        console.log($scope.selected.name == undefined)
                         if ($scope.selected != '' && flag != 1 && $scope.selected.name != undefined){
                             BrandService.add($scope.form);
                         }
